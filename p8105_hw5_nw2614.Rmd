@@ -1,0 +1,12 @@
+---
+title: "p8105_hw5_nw2614"
+author: "Natasha Woon"
+date: "2026-11-16"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+set.seed(1)
+```
+
