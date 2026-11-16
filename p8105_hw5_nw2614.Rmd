@@ -55,3 +55,19 @@ birthday_probabilities_df |>
 
 The probability of at least two people sharing a birthday increased as group size increased. Approximately, when there were 23 people in a group, the probability was approximately 50%, even though there were 365 possible birthdays. When the group size was 50, the probability increased to around 97%. The curve is roughly S-shaped, which demonstrates that the probability increased for smaller groups, before increasing rapidly for larger groups, and beginning to level off as the curve approached 1.
 
+# Problem 2
+
+```{r}
+#importing csv files
+longitudinal_arms_df = 
+  tibble(
+    files = list.files("data"),
+    path = str_c("data/", files)
+  ) |>
+  mutate(
+    data = map(path, read_csv)
+  ) |>
+  unnest(data)
+
+```
+
