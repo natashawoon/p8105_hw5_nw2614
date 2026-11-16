@@ -5,8 +5,39 @@ date: "2026-11-16"
 output: github_document
 ---
 
+# Loading Packages 
+
 ```{r}
 library(tidyverse)
 set.seed(1)
+```
+
+# Problem 1 
+
+```{r}
+#writing a function for a fixed group size
+birthday_simulations = function(n) {
+  birthdays = sample(1:365, size = n, replace = TRUE) 
+  any(duplicated(birthdays))
+}
+
+#setting up 10,000 simulations for each group size between 2 and 50
+
+birthday_simulations_df = 
+  expand_grid(
+    group_size = 2:50,
+    iter = 1:10000
+  ) |>
+  mutate(
+    shared_birthday = map(group_size, birthday_simulations)
+  ) |>
+  unnest(shared_birthday)
+
+birthday_probabilities_df =
+  birthday_simulations_df |>
+  group_by(group_size) |>
+  summarize(
+    probability = mean(shared_birthday)
+  )
 ```
 
