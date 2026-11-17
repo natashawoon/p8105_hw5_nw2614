@@ -69,5 +69,22 @@ longitudinal_arms_df =
   ) |>
   unnest(data)
 
+#tidying data
+longitudinal_tidy_df = 
+  longitudinal_arms_df |>
+  pivot_longer(
+    cols = starts_with ("week_"),
+    names_to = "week",
+    values_to = "observation"
+  ) |>
+  separate(
+    files, 
+    into = c("arm", "subject_id"),
+    sep = "_"
+  ) |>
+  mutate(
+    subject_id = str_replace(subject_id, ".csv", ""),
+    week = as.numeric(str_replace(week, "week_", ""))
+  )
 ```
 
