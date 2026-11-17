@@ -88,3 +88,29 @@ longitudinal_tidy_df =
   )
 ```
 
+
+```{r}
+#Making the Spaghetti Plot
+longitudinal_tidy_df |>
+  ggplot(aes(x = week, y = observation,
+             group = subject_id, color = arm)) +
+  geom_point() +
+  geom_path() +
+  facet_grid(~arm, labeller = as_labeller(c(
+    con = "Control",
+    exp = "Experimental"
+  ))) +
+  scale_color_discrete(
+    labels = c("Control", "Experimental")
+  ) +
+  labs(
+    title = "Longitudinal Observations by Study Arm",
+    x = "Week",
+    y = "Observation",
+    color = "Study Arm"
+  )
+```
+
+The Spaghetti Plot shows the longitudinal observation of subjects in the control and experimental arms over an eight week period. Observations in the control arm fluctuate without a clear overall trend in direction. On the other hand, observations in the experimental arms generally increase over time. This suggests that the experimental arms shows an upward trend in observations compared to the relatively stable control arm. 
+
+# Problem 3
